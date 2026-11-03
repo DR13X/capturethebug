@@ -1,0 +1,74 @@
+{
+  "@version": "2.14.0",
+  "site": [
+    {
+      "@name": "https://example.com",
+      "alerts": [
+        {
+          "pluginid": "40012",
+          "alertRef": "40012",
+          "alert": "Cross Site Scripting (Reflected)",
+          "name": "Cross Site Scripting (Reflected)",
+          "riskcode": "3",
+          "confidence": "2",
+          "riskdesc": "High (Medium)",
+          "desc": "<p>Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance.</p>",
+          "solution": "<p>Phase: Architecture and Design</p><p>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.</p>",
+          "otherinfo": "",
+          "reference": "<p>http://projects.webappsec.org/Cross-Site-Scripting</p>",
+          "cweid": "79",
+          "wascid": "8",
+          "sourceid": "1",
+          "instances": [
+            {
+              "uri": "https://example.com/search",
+              "method": "GET",
+              "param": "q",
+              "attack": "<script>alert(1)</script>",
+              "evidence": "<script>alert(1)</script>"
+            }
+          ]
+        },
+        {
+          "pluginid": "10021",
+          "alertRef": "10021",
+          "alert": "X-Content-Type-Options Header Missing",
+          "name": "X-Content-Type-Options Header Missing",
+          "riskcode": "1",
+          "confidence": "2",
+          "riskdesc": "Low (Medium)",
+          "desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'.</p>",
+          "solution": "<p>Ensure that the application sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web responses.</p>",
+          "cweid": "16",
+          "wascid": "15",
+          "instances": [
+            {
+              "uri": "https://example.com/",
+              "method": "GET"
+            }
+          ]
+        },
+        {
+          "pluginid": "6",
+          "alertRef": "6",
+          "alert": "Path Traversal",
+          "name": "Path Traversal",
+          "riskcode": "3",
+          "confidence": "1",
+          "riskdesc": "High (Low)",
+          "desc": "<p>The Path Traversal attack technique allows an attacker access to files, directories, and commands that potentially reside outside the web document root directory.</p>",
+          "solution": "<p>Assume all input is malicious. Use an appropriate security control such as an input validation routine that restricts input to known good values.</p>",
+          "cweid": "22",
+          "instances": [
+            {
+              "uri": "https://example.com/download",
+              "method": "GET",
+              "param": "file",
+              "attack": "../../../etc/passwd"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
